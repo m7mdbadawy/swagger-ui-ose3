@@ -4,13 +4,23 @@ This project deploys a Swagger UI into OpenShift 3, and it will connect to the O
 
 ----
 oc new-project swagger
-oc deploy -f https://raw.githubusercontent.com/jorgemoralespou/swagger-ui-ose3/master/swagger-ui.json
+oc create -f https://raw.githubusercontent.com/jorgemoralespou/swagger-ui-ose3/master/swagger-ui.json
 ----
 
 By default the route will be swaggerui.example.com. You can change it to match your domain. (Change the hostname for the route)
 
 ----
 oc edit route swaggerui
+----
+
+Also set CORS on openshift master
+
+----
+vi /etc/openshift/master/master-config.yaml
+-- add this line
+corsAllowedOrigins:
+  - ".*"
+systemctl restart openshift-master
 ----
 
 Once you open a browser pointing to the swagger-ui, you will need to enter any of the OpenShift Swagger api URLs:
