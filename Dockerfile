@@ -10,7 +10,8 @@ RUN rpmkeys --import file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 && \
     mkdir -p ${HOME} && \
     groupadd -r default -f -g 1001 && \
     useradd -u 1001 -r -g default -d ${HOME} -s /sbin/nologin -c "Default User" default && \
-    chown -R 1001:1001 $HOME && chmod -R 777 /var/cache/nginx && chmod -R 777 /var/log/nginx
+    chown -R 1001:1001 $HOME && chmod -R 777 /var/cache/nginx && chmod -R 777 /var/log/nginx \
+    && chmod -R 777 /var/run/nginx.pid
 
 EXPOSE 8480
 
